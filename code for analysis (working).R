@@ -209,8 +209,9 @@ exp3mod <- lm(brier ~ avgHumanTreat + algHumanTreat + lernerTreat + anchoring, d
 
 exp4mod <- lm(brier ~ avgHumanTreat + algHumanTreat + lernerTreat + anchoring, data=experiments[experiments$scenario_num == 4,]); summary(exp4mod)
 
-# RE model of treatments - lower Brier score is better - thus negative impacts are good
-mod1 <- lmer(brier ~ avgHumanTreat + algHumanTreat + lernerTreat + anchoring + (1|scenario_num),
+# MLM model of treatments - lower Brier score is better - thus negative impacts are good
+mod1 <- lmer(brier ~ avgHumanTreat + algHumanTreat + lernerTreat + anchoring + 
+                    (1|scenario_num), # rfx for exp wave
              data = experiments)
 mod1sum <- summary(mod1)
 mod1sim <- sim(mod1)
