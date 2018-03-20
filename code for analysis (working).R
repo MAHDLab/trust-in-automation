@@ -319,37 +319,135 @@ sjp.lmer(full.mod1, type = "fe"
 # plot effects for "Age" given significance
 sjp.lmer(full.mod1, type = "pred", vars = "Age", show.ci = TRUE)
 
-## STUFF TO LOOK AT LATER - in Wave 4 only (with personality, need for cognition, etc.)
+## Create folded personality measures for 5 traits, based on TIPI responses
+### CREATING EXTRAVERSION FOLDED MEASURE (single indicator based on TIPI 1 and 6) == High on extraversion = 7, low on extraversion = 1
+#### TIPI 1
+experiments$extraversion[experiments$TIPI_1 == ""] <- 0
+experiments$extraversion[experiments$TIPI_1 == "Disagree strongly"] <- 1
+experiments$extraversion[experiments$TIPI_1 == "Disagree moderately"] <- 2
+experiments$extraversion[experiments$TIPI_1 == "Disagree a little"] <- 3
+experiments$extraversion[experiments$TIPI_1 == "Neither agree nor diagree"] <- 4
+experiments$extraversion[experiments$TIPI_1 == "Agree a little"] <- 5
+experiments$extraversion[experiments$TIPI_1 == "Agree moderately"] <- 6
+experiments$extraversion[experiments$TIPI_1 == "Agree strongly"] <- 7
+#### TIPI 6 (reversed; see Gosling et al for more on coding)
+experiments$extraversion[experiments$TIPI_6 == ""] <- 0
+experiments$extraversion[experiments$TIPI_6 == "Disagree strongly"] <- 7
+experiments$extraversion[experiments$TIPI_6 == "Disagree moderately"] <- 6
+experiments$extraversion[experiments$TIPI_6 == "Disagree a little"] <- 5
+experiments$extraversion[experiments$TIPI_6 == "Neither agree nor diagree"] <- 4
+experiments$extraversion[experiments$TIPI_6 == "Agree a little"] <- 3
+experiments$extraversion[experiments$TIPI_6 == "Agree moderately"] <- 2
+experiments$extraversion[experiments$TIPI_6 == "Agree strongly"] <- 1
 
-## TIPI scoring (in relation to the Big 5 -- ‘‘R’’ denotes reverse-scored items): 
-## See footnote in Appendix A, from Original TIPI article: Gosling, Samuel D., Peter J. Rentfrow, and William B. Swann Jr. "A very brief measure of the Big-Five personality domains." Journal of Research in personality 37.6 (2003): 504-528.
-# Extraversion: 1, 6R; Agreeableness: 2R, 7; Conscientiousness; 3, 8R; Emotional Stability: 4R, 9; Openness to Experiences: 5, 10R.
+table(experiments$extraversion)
 
-# Extraversion (1, 6R): 
-experiments$TIPI_1
-experiments$TIPI_6 # needs to be R
+### CREATING AGREEABLENESS FOLDED MEASURE (single indicator based on TIPI 2 and 7) == High on agreeableness = 7, low on agreeableness = 1
+#### TIPI 7
+experiments$agreeableness[experiments$TIPI_7 == ""] <- 0
+experiments$agreeableness[experiments$TIPI_7 == "Disagree strongly"] <- 1
+experiments$agreeableness[experiments$TIPI_7 == "Disagree moderately"] <- 2
+experiments$agreeableness[experiments$TIPI_7 == "Disagree a little"] <- 3
+experiments$agreeableness[experiments$TIPI_7 == "Neither agree nor diagree"] <- 4
+experiments$agreeableness[experiments$TIPI_7 == "Agree a little"] <- 5
+experiments$agreeableness[experiments$TIPI_7 == "Agree moderately"] <- 6
+experiments$agreeableness[experiments$TIPI_7 == "Agree strongly"] <- 7
+#### TIPI 2 (reversed; see Gosling et al for more on coding)
+experiments$agreeableness[experiments$TIPI_2 == ""] <- 0
+experiments$agreeableness[experiments$TIPI_2 == "Disagree strongly"] <- 7
+experiments$agreeableness[experiments$TIPI_2 == "Disagree moderately"] <- 6
+experiments$agreeableness[experiments$TIPI_2 == "Disagree a little"] <- 5
+experiments$agreeableness[experiments$TIPI_2 == "Neither agree nor diagree"] <- 4
+experiments$agreeableness[experiments$TIPI_2 == "Agree a little"] <- 3
+experiments$agreeableness[experiments$TIPI_2 == "Agree moderately"] <- 2
+experiments$agreeableness[experiments$TIPI_2 == "Agree strongly"] <- 1
 
-# Agreeableness (2R, 7):
-experiments$TIPI_2 # needs to be R
-experiments$TIPI_7
+table(experiments$agreeableness)
 
-# Conscientiousness (3, 8R):
-experiments$TIPI_3
-experiments$TIPI_8 # needs to be R
+### CREATING CONSCIENTIOUSNESS FOLDED MEASURE (single indicator based on TIPI 3 and 8) == High on conscientiousness = 7, low on conscientiousness = 1
+#### TIPI 3
+experiments$conscientiousness[experiments$TIPI_3 == ""] <- 0
+experiments$conscientiousness[experiments$TIPI_3 == "Disagree strongly"] <- 1
+experiments$conscientiousness[experiments$TIPI_3 == "Disagree moderately"] <- 2
+experiments$conscientiousness[experiments$TIPI_3 == "Disagree a little"] <- 3
+experiments$conscientiousness[experiments$TIPI_3 == "Neither agree nor diagree"] <- 4
+experiments$conscientiousness[experiments$TIPI_3 == "Agree a little"] <- 5
+experiments$conscientiousness[experiments$TIPI_3 == "Agree moderately"] <- 6
+experiments$conscientiousness[experiments$TIPI_3 == "Agree strongly"] <- 7
+#### TIPI 8 (reversed; see Gosling et al for more on coding)
+experiments$conscientiousness[experiments$TIPI_8 == ""] <- 0
+experiments$conscientiousness[experiments$TIPI_8 == "Disagree strongly"] <- 7
+experiments$conscientiousness[experiments$TIPI_8 == "Disagree moderately"] <- 6
+experiments$conscientiousness[experiments$TIPI_8 == "Disagree a little"] <- 5
+experiments$conscientiousness[experiments$TIPI_8 == "Neither agree nor diagree"] <- 4
+experiments$conscientiousness[experiments$TIPI_8 == "Agree a little"] <- 3
+experiments$conscientiousness[experiments$TIPI_8 == "Agree moderately"] <- 2
+experiments$conscientiousness[experiments$TIPI_8 == "Agree strongly"] <- 1
 
-# Emotional Stability (4R, 9):
-experiments$TIPI_4 # needs to be R
-experiments$TIPI_9
+table(experiments$conscientiousness)
 
-# Openness to Experiences (5, 10R):
-experiments$TIPI_5
-experiments$TIPI_10 # needs to be R
+### CREATING EMOTIONAL STABILITY FOLDED MEASURE (single indicator based on TIPI 4 and 9) == High on emotional.stability = 7, low on emotional.stability = 1
+#### TIPI 9
+experiments$emotional.stability[experiments$TIPI_9 == ""] <- 0
+experiments$emotional.stability[experiments$TIPI_9 == "Disagree strongly"] <- 1
+experiments$emotional.stability[experiments$TIPI_9 == "Disagree moderately"] <- 2
+experiments$emotional.stability[experiments$TIPI_9 == "Disagree a little"] <- 3
+experiments$emotional.stability[experiments$TIPI_9 == "Neither agree nor diagree"] <- 4
+experiments$emotional.stability[experiments$TIPI_9 == "Agree a little"] <- 5
+experiments$emotional.stability[experiments$TIPI_9 == "Agree moderately"] <- 6
+experiments$emotional.stability[experiments$TIPI_9 == "Agree strongly"] <- 7
+#### TIPI 4 (reversed; see Gosling et al for more on coding)
+experiments$emotional.stability[experiments$TIPI_4 == ""] <- 0
+experiments$emotional.stability[experiments$TIPI_4 == "Disagree strongly"] <- 7
+experiments$emotional.stability[experiments$TIPI_4 == "Disagree moderately"] <- 6
+experiments$emotional.stability[experiments$TIPI_4 == "Disagree a little"] <- 5
+experiments$emotional.stability[experiments$TIPI_4 == "Neither agree nor diagree"] <- 4
+experiments$emotional.stability[experiments$TIPI_4 == "Agree a little"] <- 3
+experiments$emotional.stability[experiments$TIPI_4 == "Agree moderately"] <- 2
+experiments$emotional.stability[experiments$TIPI_4 == "Agree strongly"] <- 1
 
-### LOOK AT THIS LATER FOR REVERSE CODING:
-original <- matrix(sample(6,50,replace=TRUE),10,5)
-keys <- c(1,1,-1,-1,1)  #reverse the 3rd and 4th items
-new <- reverse.code(keys,original,mini=rep(1,5),maxi=rep(6,5))
-original[1:3,]
-new[1:3,]
+table(experiments$emotional.stability)
+
+### CREATING OPENNESS TO EXPERIENCES FOLDED MEASURE (single indicator based on TIPI 5 and 10) == High on openness = 7, low on openness = 1
+#### TIPI 5
+experiments$openness[experiments$TIPI_5 == ""] <- 0
+experiments$openness[experiments$TIPI_5 == "Disagree strongly"] <- 1
+experiments$openness[experiments$TIPI_5 == "Disagree moderately"] <- 2
+experiments$openness[experiments$TIPI_5 == "Disagree a little"] <- 3
+experiments$openness[experiments$TIPI_5 == "Neither agree nor diagree"] <- 4
+experiments$openness[experiments$TIPI_5 == "Agree a little"] <- 5
+experiments$openness[experiments$TIPI_5 == "Agree moderately"] <- 6
+experiments$openness[experiments$TIPI_5 == "Agree strongly"] <- 7
+#### TIPI 10 (reversed; see Gosling et al for more on coding)
+experiments$openness[experiments$TIPI_10 == ""] <- 0
+experiments$openness[experiments$TIPI_10 == "Disagree strongly"] <- 7
+experiments$openness[experiments$TIPI_10 == "Disagree moderately"] <- 6
+experiments$openness[experiments$TIPI_10 == "Disagree a little"] <- 5
+experiments$openness[experiments$TIPI_10 == "Neither agree nor diagree"] <- 4
+experiments$openness[experiments$TIPI_10 == "Agree a little"] <- 3
+experiments$openness[experiments$TIPI_10 == "Agree moderately"] <- 2
+experiments$openness[experiments$TIPI_10 == "Agree strongly"] <- 1
+
+table(experiments$openness)
 
 
+### Dichotomous personality indicators based on responses
+experiments$extravert <- ifelse(experiments$extraversion==5 | 
+                                  experiments$extraversion==6 | 
+                                  experiments$extraversion==7, 1, 0)
+
+experiments$agreeable <- ifelse(experiments$agreeableness==5 | 
+                                  experiments$agreeableness==6 | 
+                                  experiments$agreeableness==7, 1, 0)
+
+experiments$conscientious <- ifelse(experiments$conscientiousness==5 | 
+                                      experiments$conscientiousness==6 | 
+                                      experiments$conscientiousness==7, 1, 0)
+
+experiments$stable <- ifelse(experiments$emotional.stability==5 | 
+                               experiments$emotional.stability==6 | 
+                               experiments$emotional.stability==7, 1, 0)
+
+experiments$open <- ifelse(experiments$openness==5 | 
+                             experiments$openness==6 | 
+                             experiments$openness==7, 1, 0)
