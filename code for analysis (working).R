@@ -5,6 +5,7 @@ library(ggplot2)
 library(tidyr)
 
 # Load the data (from Ryan's DB); see README markdown for this
+## Changing DVs to "advice" and "weight" --> Changes to this working code forthcoming
 
 # Add in the labels for the experiment
 experiment1$scenario_num <- 1
