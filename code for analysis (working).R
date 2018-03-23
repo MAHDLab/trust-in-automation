@@ -12,16 +12,11 @@ library(stargazer)
 library(grid)
 
 # Load the data
-#experiment1 <- read.csv("C:/Users/Ryan/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 1/results01112018.csv", as.is = TRUE)
-#experiment2 <- read.csv("C:/Users/Ryan/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 2/results01112018.csv", as.is = TRUE)
-#experiment3 <- read.csv("C:/Users/Ryan/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 3/results01112018.csv", as.is = TRUE)
-#experiment4 <- read.csv("C:/Users/Ryan/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 4/results03052018.csv", as.is = TRUE)
-
 # From P's DB for quick access
-experiment1 <- read.csv("/Users/bpwaggo/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 1/results01112018.csv", as.is = TRUE)
-experiment2 <- read.csv("/Users/bpwaggo/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 2/results01112018.csv", as.is = TRUE)
-experiment3 <- read.csv("/Users/bpwaggo/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 3/results01112018.csv", as.is = TRUE)
-experiment4 <- read.csv("/Users/bpwaggo/Dropbox/Hybrid Forecasting Houston/Trust in Automation Experiments/Experiment 4/results03052018.csv", as.is = TRUE)
+experiment1 <- read.csv(".../Experiment 1/results01112018.csv", as.is = TRUE)
+experiment2 <- read.csv(".../Experiment 2/results01112018.csv", as.is = TRUE)
+experiment3 <- read.csv(".../Experiment 3/results01112018.csv", as.is = TRUE)
+experiment4 <- read.csv(".../Experiment 4/results03052018.csv", as.is = TRUE)
 
 
 ####
