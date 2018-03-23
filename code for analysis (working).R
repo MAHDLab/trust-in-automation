@@ -589,156 +589,8 @@ experiments$partisanship[experiments$partyID == "Democrat" & experiments$partySt
 experiments$partisanship[experiments$partyID == "Republican" & experiments$partyStrong == "Yes, strongly"] <- 7
 experiments$partisanship[experiments$partyID == "Democrat" & experiments$partyStrong == "Yes, strongly"] <- 1
 
-
 # Age
 experiments$age <- experiments$Age
-
-
-# Personality: TIPI - Only on Exp. 4 - UPDATE ALL CODE BELOW
-### EXTRAVERSION
-#### TIPI 1
-#experiments$TIPI_1[experiments$TIPI_1 == ""] <- 0
-experiments$TIPI_1[experiments$TIPI_1 == "Disagree strongly"] <- 1
-experiments$TIPI_1[experiments$TIPI_1 == "Disagree moderately"] <- 2
-experiments$TIPI_1[experiments$TIPI_1 == "Disagree a little"] <- 3
-experiments$TIPI_1[experiments$TIPI_1 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_1[experiments$TIPI_1 == "Agree a little"] <- 5
-experiments$TIPI_1[experiments$TIPI_1 == "Agree moderately"] <- 6
-experiments$TIPI_1[experiments$TIPI_1 == "Agree strongly"] <- 7
-#### TIPI 6 (reversed; see Gosling et al for more on coding)
-#experiments$TIPI_6[experiments$TIPI_6 == ""] <- 0
-experiments$TIPI_6[experiments$TIPI_6 == "Disagree strongly"] <- 7
-experiments$TIPI_6[experiments$TIPI_6 == "Disagree moderately"] <- 6
-experiments$TIPI_6[experiments$TIPI_6 == "Disagree a little"] <- 5
-experiments$TIPI_6[experiments$TIPI_6 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_6[experiments$TIPI_6 == "Agree a little"] <- 3
-experiments$TIPI_6[experiments$TIPI_6 == "Agree moderately"] <- 2
-experiments$TIPI_6[experiments$TIPI_6 == "Agree strongly"] <- 1
-
-
-### AGREEABLENESS
-#### TIPI 7
-#experiments$TIPI_7[experiments$TIPI_7 == ""] <- 0
-experiments$TIPI_7[experiments$TIPI_7 == "Disagree strongly"] <- 1
-experiments$TIPI_7[experiments$TIPI_7 == "Disagree moderately"] <- 2
-experiments$TIPI_7[experiments$TIPI_7 == "Disagree a little"] <- 3
-experiments$TIPI_7[experiments$TIPI_7 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_7[experiments$TIPI_7 == "Agree a little"] <- 5
-experiments$TIPI_7[experiments$TIPI_7 == "Agree moderately"] <- 6
-experiments$TIPI_7[experiments$TIPI_7 == "Agree strongly"] <- 7
-#### TIPI 2 (reversed; see Gosling et al for more on coding)
-#experiments$TIPI_2[experiments$TIPI_2 == ""] <- 0
-experiments$TIPI_2[experiments$TIPI_2 == "Disagree strongly"] <- 7
-experiments$TIPI_2[experiments$TIPI_2 == "Disagree moderately"] <- 6
-experiments$TIPI_2[experiments$TIPI_2 == "Disagree a little"] <- 5
-experiments$TIPI_2[experiments$TIPI_2 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_2[experiments$TIPI_2 == "Agree a little"] <- 3
-experiments$TIPI_2[experiments$TIPI_2 == "Agree moderately"] <- 2
-experiments$TIPI_2[experiments$TIPI_2 == "Agree strongly"] <- 1
-
-
-### CONSCIENTIOUSNESS
-#### TIPI 3
-#experiments$TIPI_3[experiments$TIPI_3 == ""] <- 0
-experiments$TIPI_3[experiments$TIPI_3 == "Disagree strongly"] <- 1
-experiments$TIPI_3[experiments$TIPI_3 == "Disagree moderately"] <- 2
-experiments$TIPI_3[experiments$TIPI_3 == "Disagree a little"] <- 3
-experiments$TIPI_3[experiments$TIPI_3 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_3[experiments$TIPI_3 == "Agree a little"] <- 5
-experiments$TIPI_3[experiments$TIPI_3 == "Agree moderately"] <- 6
-experiments$TIPI_3[experiments$TIPI_3 == "Agree strongly"] <- 7
-#### TIPI 8 (reversed; see Gosling et al for more on coding)
-#experiments$TIPI_8[experiments$TIPI_8 == ""] <- 0
-experiments$TIPI_8[experiments$TIPI_8 == "Disagree strongly"] <- 7
-experiments$TIPI_8[experiments$TIPI_8 == "Disagree moderately"] <- 6
-experiments$TIPI_8[experiments$TIPI_8 == "Disagree a little"] <- 5
-experiments$TIPI_8[experiments$TIPI_8 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_8[experiments$TIPI_8 == "Agree a little"] <- 3
-experiments$TIPI_8[experiments$TIPI_8 == "Agree moderately"] <- 2
-experiments$TIPI_8[experiments$TIPI_8 == "Agree strongly"] <- 1
-
-
-### EMOTIONAL STABILITY
-#### TIPI 9
-#experiments$TIPI_9[experiments$TIPI_9 == ""] <- 0
-experiments$TIPI_9[experiments$TIPI_9 == "Disagree strongly"] <- 1
-experiments$TIPI_9[experiments$TIPI_9 == "Disagree moderately"] <- 2
-experiments$TIPI_9[experiments$TIPI_9 == "Disagree a little"] <- 3
-experiments$TIPI_9[experiments$TIPI_9 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_9[experiments$TIPI_9 == "Agree a little"] <- 5
-experiments$TIPI_9[experiments$TIPI_9 == "Agree moderately"] <- 6
-experiments$TIPI_9[experiments$TIPI_9 == "Agree strongly"] <- 7
-#### TIPI 4 (reversed; see Gosling et al for more on coding)
-#experiments$TIPI_4[experiments$TIPI_4 == ""] <- 0
-experiments$TIPI_4[experiments$TIPI_4 == "Disagree strongly"] <- 7
-experiments$TIPI_4[experiments$TIPI_4 == "Disagree moderately"] <- 6
-experiments$TIPI_4[experiments$TIPI_4 == "Disagree a little"] <- 5
-experiments$TIPI_4[experiments$TIPI_4 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_4[experiments$TIPI_4 == "Agree a little"] <- 3
-experiments$TIPI_4[experiments$TIPI_4 == "Agree moderately"] <- 2
-experiments$TIPI_4[experiments$TIPI_4 == "Agree strongly"] <- 1
-
-
-### OPENNESS TO EXPERIENCES
-#### TIPI 5
-#experiments$TIPI_5[experiments$TIPI_5 == ""] <- 0
-experiments$TIPI_5[experiments$TIPI_5 == "Disagree strongly"] <- 1
-experiments$TIPI_5[experiments$TIPI_5 == "Disagree moderately"] <- 2
-experiments$TIPI_5[experiments$TIPI_5 == "Disagree a little"] <- 3
-experiments$TIPI_5[experiments$TIPI_5 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_5[experiments$TIPI_5 == "Agree a little"] <- 5
-experiments$TIPI_5[experiments$TIPI_5 == "Agree moderately"] <- 6
-experiments$TIPI_5[experiments$TIPI_5 == "Agree strongly"] <- 7
-#### TIPI 10 (reversed; see Gosling et al for more on coding)
-#experiments$TIPI_10[experiments$TIPI_10 == ""] <- 0
-experiments$TIPI_10[experiments$TIPI_10 == "Disagree strongly"] <- 7
-experiments$TIPI_10[experiments$TIPI_10 == "Disagree moderately"] <- 6
-experiments$TIPI_10[experiments$TIPI_10 == "Disagree a little"] <- 5
-experiments$TIPI_10[experiments$TIPI_10 == "Neither agree nor diagree"] <- 4
-experiments$TIPI_10[experiments$TIPI_10 == "Agree a little"] <- 3
-experiments$TIPI_10[experiments$TIPI_10 == "Agree moderately"] <- 2
-experiments$TIPI_10[experiments$TIPI_10 == "Agree strongly"] <- 1
-
-
-experiments$extroverted = (experiments$TIPI_1 + experiments$TIPI_6)/2
-experiments$agreeableness = (experiments$TIPI_2 + experiments$TIPI_7)/2
-experiments$openness = (experiments$TIPI_5 + experiments$TIPI_10)/2
-experiments$conscientiousness = (experiments$TIPI_3 + experiments$TIPI_8)/2
-experiments$stability = (experiments$TIPI_4 + experiments$TIPI_9)/2
-
-
-# Personality: Cognition and Judgement - ONLY IN 4 - exclude from full analysis
-experiments$needcog1[experiments$CogEval_1 == "Extremely characteristic"] <- 5
-experiments$needcog1[experiments$CogEval_1 == "Somewhat characteristic"] <- 4
-experiments$needcog1[experiments$CogEval_1 == "Uncertain"] <- 3
-experiments$needcog1[experiments$CogEval_1 == "Somewhat uncharacteristic"] <- 2
-experiments$needcog1[experiments$CogEval_1 == "Extremely uncharacteristic"] <- 1
-
-experiments$needcog2[experiments$CogEval_2 == "Extremely characteristic"] <- 5
-experiments$needcog2[experiments$CogEval_2 == "Somewhat characteristic"] <- 4
-experiments$needcog2[experiments$CogEval_2 == "Uncertain"] <- 3
-experiments$needcog2[experiments$CogEval_2 == "Somewhat uncharacteristic"] <- 2
-experiments$needcog2[experiments$CogEval_2 == "Extremely uncharacteristic"] <- 1
-
-experiments$needcog3[experiments$CogEval_3 == "Extremely characteristic"] <- 5
-experiments$needcog3[experiments$CogEval_3 == "Somewhat characteristic"] <- 4
-experiments$needcog3[experiments$CogEval_3 == "Uncertain"] <- 3
-experiments$needcog3[experiments$CogEval_3 == "Somewhat uncharacteristic"] <- 2
-experiments$needcog3[experiments$CogEval_3 == "Extremely uncharacteristic"] <- 1
-
-experiments$needcog4[experiments$CogEval_4 == "Extremely characteristic"] <- 1
-experiments$needcog4[experiments$CogEval_4 == "Somewhat characteristic"] <- 2
-experiments$needcog4[experiments$CogEval_4 == "Uncertain"] <- 3
-experiments$needcog4[experiments$CogEval_4 == "Somewhat uncharacteristic"] <- 4
-experiments$needcog4[experiments$CogEval_4 == "Extremely uncharacteristic"] <- 5
-
-
-experiments$needjudge = (experiments$needcog1 + experiments$needcog3)/2
-
-experiments$needcognition = (experiments$needcog2 + experiments$needcog4)/2
-
-
-
 
 #### MODELS
 
@@ -1593,3 +1445,35 @@ experiments$stable <- ifelse(experiments$emotional.stability==5 |
 experiments$open <- ifelse(experiments$openness==5 | 
                              experiments$openness==6 | 
                              experiments$openness==7, 1, 0)
+
+
+# Personality: Cognition and Judgement - ONLY IN 4 - exclude from full analysis
+experiments$needcog1[experiments$CogEval_1 == "Extremely characteristic"] <- 5
+experiments$needcog1[experiments$CogEval_1 == "Somewhat characteristic"] <- 4
+experiments$needcog1[experiments$CogEval_1 == "Uncertain"] <- 3
+experiments$needcog1[experiments$CogEval_1 == "Somewhat uncharacteristic"] <- 2
+experiments$needcog1[experiments$CogEval_1 == "Extremely uncharacteristic"] <- 1
+
+experiments$needcog2[experiments$CogEval_2 == "Extremely characteristic"] <- 5
+experiments$needcog2[experiments$CogEval_2 == "Somewhat characteristic"] <- 4
+experiments$needcog2[experiments$CogEval_2 == "Uncertain"] <- 3
+experiments$needcog2[experiments$CogEval_2 == "Somewhat uncharacteristic"] <- 2
+experiments$needcog2[experiments$CogEval_2 == "Extremely uncharacteristic"] <- 1
+
+experiments$needcog3[experiments$CogEval_3 == "Extremely characteristic"] <- 5
+experiments$needcog3[experiments$CogEval_3 == "Somewhat characteristic"] <- 4
+experiments$needcog3[experiments$CogEval_3 == "Uncertain"] <- 3
+experiments$needcog3[experiments$CogEval_3 == "Somewhat uncharacteristic"] <- 2
+experiments$needcog3[experiments$CogEval_3 == "Extremely uncharacteristic"] <- 1
+
+experiments$needcog4[experiments$CogEval_4 == "Extremely characteristic"] <- 1
+experiments$needcog4[experiments$CogEval_4 == "Somewhat characteristic"] <- 2
+experiments$needcog4[experiments$CogEval_4 == "Uncertain"] <- 3
+experiments$needcog4[experiments$CogEval_4 == "Somewhat uncharacteristic"] <- 4
+experiments$needcog4[experiments$CogEval_4 == "Extremely uncharacteristic"] <- 5
+
+
+experiments$needjudge = (experiments$needcog1 + experiments$needcog3)/2
+
+experiments$needcognition = (experiments$needcog2 + experiments$needcog4)/2
+
