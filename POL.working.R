@@ -594,7 +594,7 @@ experiments$age <- experiments$Age
 
 #### MODELS
 
-# Conditions: AvgHumanTreat, RandHumanTreat, AlgHumanTreat, LernerTreat, Anchoring; BUT "RandHumanTreat" dropped as baseline
+# Conditions: AvgHumanTreat, RandHumanTreat, AlgHumanTreat, LernerTreat, Anchoring; Drop RandHumanTreat as baseline
 
 model1 <- lmer(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + # conditions
                  tia + age + ed + female + partisanship + # controls
