@@ -18,7 +18,6 @@ experiment2 <- read.csv(".../Experiment 2/results01112018.csv", as.is = TRUE)
 experiment3 <- read.csv(".../Experiment 3/results01112018.csv", as.is = TRUE)
 experiment4 <- read.csv(".../Experiment 4/results03052018.csv", as.is = TRUE)
 
-
 ####
 ####
 #### Create some variables in similar syntax as CJ Exp
