@@ -448,7 +448,7 @@ Tables <- stargazer(model1, model2, model4, model5, model7, model8, model10, mod
 # Convert Tables to data frame and coerce the one vector (also called Tables) to character
 Tables <- as.data.frame(Tables)
 Tables$Tables <- as.character(Tables$Tables)
-# Find where you want to put in the random effect. In our case, this is right after the last fixed effect. Line: 23.
+# Find where you want to put in the random effect. In our case, this is right after the last fixed effect. Line: 39 in this case.
 r <- 39
 # Create some standard label lines
 randomeffect <- "{\\bf Random Effect} & & \\\\"
