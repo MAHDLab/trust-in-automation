@@ -9,7 +9,7 @@ library(tidyverse)
 library(stargazer)
 library(grid)
 
-## TABLES
+# TABLES
 # Create table for multilevel results
 # Note the hack for putting random effects into Stargazer from:
 # http://svmiller.com/blog/2015/02/quasi-automating-the-inclusion-of-random-effects-in-rs-stargazer-package/
