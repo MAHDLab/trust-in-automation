@@ -441,10 +441,11 @@ model1 <- lm(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring 
                #LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability, 
                data = experiments); summary(model1)
 
-model2.base <- lm(tia ~ needcog + needjudge +
-                 extroverted + agreeableness + openness + conscientiousness + stability +
-               data = experiments[experiments$adviceWt <= 1,]); summary(model2)
+model2.cog <- lm(tia ~ needcog + needjudge +
+               data = experiments[experiments$adviceWt <= 1,]); summary(model2.cog)
 
+model2.b5 <- lm(tia ~ extroverted + agreeableness + openness + conscientiousness + stability +
+               data = experiments[experiments$adviceWt <= 1,]); summary(model2.b5)
 
 model2.full <- lm(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
                  age + ed + female + partisanship + 
