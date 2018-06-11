@@ -451,8 +451,14 @@ model2.full <- lm(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat +
                  age + ed + female + partisanship + 
                  needcog + needjudge +
                  extroverted + agreeableness + openness + conscientiousness + stability +
+                data = experiments[experiments$adviceWt <= 1,]); summary(model2.full)
+
+model2.inxn <- lm(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
+                 age + ed + female + partisanship + 
+                 needcog + needjudge +
+                 extroverted + agreeableness + openness + conscientiousness + stability +
                LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability,
-               data = experiments[experiments$adviceWt <= 1,]); summary(model2)
+               data = experiments[experiments$adviceWt <= 1,]); summary(model2.inxn)
 
 
 
