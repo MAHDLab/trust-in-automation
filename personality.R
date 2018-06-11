@@ -433,7 +433,7 @@ experiments$needjudge = (experiments$needcog1 + experiments$needcog3)/2
 experiments$needcog = (experiments$needcog2 + experiments$needcog4)/2
 
 
-## MODELS
+## MODELS - predicting treatment/advice impacts
 model1 <- lm(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + 
                  tia + age + ed + female + partisanship + 
                  #needcog + needjudge +
@@ -441,17 +441,17 @@ model1 <- lm(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring 
                #LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability, 
                data = experiments); summary(model1)
 
-model2 <- lm(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
+model2.base <- lm(tia ~ needcog + needjudge +
+                 extroverted + agreeableness + openness + conscientiousness + stability +
+               data = experiments[experiments$adviceWt <= 1,]); summary(model2)
+
+
+model2.full <- lm(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
                  age + ed + female + partisanship + 
-                 #needcog + needjudge +
+                 needcog + needjudge +
                  extroverted + agreeableness + openness + conscientiousness + stability +
                LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability,
                data = experiments[experiments$adviceWt <= 1,]); summary(model2)
 
-#model3 <- lm(brier ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + 
-#                 tia + age + ed + female + partisanship + 
-#                 needcog + needjudge +
-#                 extroverted + agreeableness + openness + conscientiousness + stability,
-#               data = experiments); summary(model3)
 
 
