@@ -436,29 +436,33 @@ experiments$needcog = (experiments$needcog2 + experiments$needcog4)/2
 ## MODELS - predicting treatment/advice impacts
 model1 <- lmer(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + 
                  tia + age + ed + female + partisanship + 
-                 #needcog + needjudge +
-                 extroverted + agreeableness + openness + conscientiousness + stability,
-               #LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability, 
+                 needcog + needjudge +
+                 extroverted + agreeableness + openness + conscientiousness + stability
+                                   (1|ResponseId) + (1|scenario),    
                data = experiments); summary(model1)
 
 model2.cog <- lmer(tia ~ needcog + needjudge +
+                                       (1|ResponseId) + (1|scenario),    
                data = experiments[experiments$adviceWt <= 1,]); summary(model2.cog)
 
 model2.b5 <- lmer(tia ~ extroverted + agreeableness + openness + conscientiousness + stability +
+                                      (1|ResponseId) + (1|scenario),    
                data = experiments[experiments$adviceWt <= 1,]); summary(model2.b5)
 
 model2.full <- lmer(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
                  age + ed + female + partisanship + 
                  needcog + needjudge +
                  extroverted + agreeableness + openness + conscientiousness + stability +
+                                        (1|ResponseId) + (1|scenario),    
                 data = experiments[experiments$adviceWt <= 1,]); summary(model2.full)
 
 model2.inxn <- lmer(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
                  age + ed + female + partisanship + 
                  needcog + needjudge +
                  extroverted + agreeableness + openness + conscientiousness + stability +
-               LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability,
-               data = experiments[experiments$adviceWt <= 1,]); summary(model2.inxn)
+               LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability +
+                    (1|ResponseId) + (1|scenario),              
+                    data = experiments[experiments$adviceWt <= 1,]); summary(model2.inxn)
 
 
 
