@@ -433,7 +433,7 @@ experiments$needjudge = (experiments$needcog1 + experiments$needcog3)/2
 experiments$needcog = (experiments$needcog2 + experiments$needcog4)/2
 
 
-## MODELS - predicting treatment/advice impacts
+## MODELS - predicting treatment/advice impacts on distance
 model1 <- lmer(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + 
                  tia + age + ed + female + partisanship + 
                  needcog + needjudge +
@@ -441,6 +441,7 @@ model1 <- lmer(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchorin
                                    (1|ResponseId) + (1|scenario),    
                data = experiments); summary(model1)
 
+## MODELS - predicting trust in automation
 model2.cog <- lmer(tia ~ needcog + needjudge +
                                        (1|ResponseId) + (1|scenario),    
                data = experiments[experiments$adviceWt <= 1,]); summary(model2.cog)
