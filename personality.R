@@ -434,26 +434,26 @@ experiments$needcog = (experiments$needcog2 + experiments$needcog4)/2
 
 
 ## MODELS - predicting treatment/advice impacts
-model1 <- lm(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + 
+model1 <- lmer(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + 
                  tia + age + ed + female + partisanship + 
                  #needcog + needjudge +
                  extroverted + agreeableness + openness + conscientiousness + stability,
                #LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability, 
                data = experiments); summary(model1)
 
-model2.cog <- lm(tia ~ needcog + needjudge +
+model2.cog <- lmer(tia ~ needcog + needjudge +
                data = experiments[experiments$adviceWt <= 1,]); summary(model2.cog)
 
-model2.b5 <- lm(tia ~ extroverted + agreeableness + openness + conscientiousness + stability +
+model2.b5 <- lmer(tia ~ extroverted + agreeableness + openness + conscientiousness + stability +
                data = experiments[experiments$adviceWt <= 1,]); summary(model2.b5)
 
-model2.full <- lm(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
+model2.full <- lmer(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
                  age + ed + female + partisanship + 
                  needcog + needjudge +
                  extroverted + agreeableness + openness + conscientiousness + stability +
                 data = experiments[experiments$adviceWt <= 1,]); summary(model2.full)
 
-model2.inxn <- lm(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
+model2.inxn <- lmer(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
                  age + ed + female + partisanship + 
                  needcog + needjudge +
                  extroverted + agreeableness + openness + conscientiousness + stability +
