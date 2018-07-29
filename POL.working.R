@@ -1070,7 +1070,7 @@ p.dist <- qplot(experiments$distance, geom = 'blank',
   theme_bw() + theme(plot.title = element_text(hjust = 0.5), legend.title = element_blank())
 p.dist
 
-p.weight <- qplot(experiments$adviceWt, geom = 'blank',
+p.weight <- qplot(experiments[experiments$adviceWt <= 1,]$adviceWt, geom = 'blank',
                 main = "Weight of Advice",
                 xlab = "Range of Weight of Advice",
                 ylab = "Density") +
