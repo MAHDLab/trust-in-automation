@@ -465,5 +465,58 @@ model2.inxn <- lmer(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat +
                     (1|ResponseId) + (1|scenario),              
                     data = experiments[experiments$adviceWt <= 1,]); summary(model2.inxn)
 
+### SJPlot Stuff
+## CJ - NfC/NfE
+cj1long$NfC <- cj1long$needcog
+cj1long$NfE <- cj1long$needjudge
+cj1long$Algorithm <- cj1long$algorithm
+cj1long$Judge <- cj1long$judge
+
+# Re-run for Sjplot labels
+m4 <- lmer(tia ~ NfC + NfE +
+             age + ed + female + partisanship +
+             algorithm + judge +
+             (1|ResponseId) + (1|scenario),
+           data = cj1long[cj1long$adviceWt <= 1,]); summary(m4)
+
+
+library(sjPlot)
+library(sjlabelled)
+library(sjmisc)
+library(ggplot2)
+
+
+plot_model(m4, vline.color = "dark gray", colors = "black", title = "Impact of NfC & NfE on Trust in Automation",
+           order.terms = c(1, 2),
+           rm.terms = c("age", "ed", "female", "partisanship", "algorithm", "judge"),
+           auto.label = FALSE)
+
+plot_model(m5, vline.color = "dark gray", colors = "black", title = "Impact of NfC & NfE on Weighting of Advice",
+           order.terms = c(9, 10, 11, 12),
+           rm.terms = c("needcog", "needjudge", "age", "ed", "female", "partisanship", "algorithm", "judge"),
+           auto.label = FALSE)
+
+plot_model(m6, vline.color = "dark gray", colors = "black", title = "Impact of NfC & NfE on Distance to Advice",
+           order.terms = c(9, 10, 11, 12),
+           rm.terms = c("needcog", "needjudge", "age", "ed", "female", "partisanship", "algorithm", "judge"),
+           auto.label = FALSE)
+
+
+
+
+# TIA Conditional Plots
+plot_model(m4, type = "pred", terms = c("needcog", "algorithm"), 
+           title = "Conditional Effect of NfC & Algorithm Condition on Trust in Automation") + ylim(3,5.5)
+
+plot_model(m4, type = "pred", terms = c("needcog", "judge"), 
+           title = "Conditional Effect of NfC & Judge Condition on Trust in Automation") + ylim(3,5.5)
+
+# Weight Conditional Plots
+plot_model(m5, type = "pred", terms = c("needcog", "algorithm"), 
+           title = "Conditional Effect of NfC & Algorithm Condition on Weight of Advice") + ylim(0,0.6)
+
+plot_model(m5, type = "pred", terms = c("needcog", "judge"), 
+           title = "Conditional Effect of NfC & Judge Condition on Weight of Advice") + ylim(0,0.6)
+
 
 
