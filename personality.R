@@ -432,59 +432,81 @@ experiments$needjudge = (experiments$needcog1 + experiments$needcog3)/2
 
 experiments$needcog = (experiments$needcog2 + experiments$needcog4)/2
 
+###
+###
+### MODELS
+###
+###
 
-## MODELS - predicting treatment/advice impacts on distance
-model1 <- lmer(distance ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + Anchoring + 
-                 tia + age + ed + female + partisanship + 
-                 needcog + needjudge +
-                 extroverted + agreeableness + openness + conscientiousness + stability
-                                   (1|ResponseId) + (1|scenario),    
-               data = experiments); summary(model1)
+#### Simple Bivariate effects to motivate
+m1 <- lm(adviceWt ~ algorithm + judge,
+           data = cj1long[cj1long$adviceWt <= 1,]); summary(m1)
 
-## MODELS - predicting trust in automation
-model2.cog <- lmer(tia ~ needcog + needjudge +
-                                       (1|ResponseId) + (1|scenario),    
-               data = experiments[experiments$adviceWt <= 1,]); summary(model2.cog)
+m2 <- lm(distance ~ algorithm + judge,
+         data = cj1long[cj1long$adviceWt <= 1,]); summary(m2)
 
-model2.b5 <- lmer(tia ~ extroverted + agreeableness + openness + conscientiousness + stability +
-                                      (1|ResponseId) + (1|scenario),    
-               data = experiments[experiments$adviceWt <= 1,]); summary(model2.b5)
+#### TRUST - NC and NE
+m4 <- lmer(tia ~ needcog + needjudge +
+           age + ed + female + partisanship +
+           algorithm + judge +
+         (1|ResponseId) + (1|scenario),
+         data = cj1long[cj1long$adviceWt <= 1,]); summary(m4)
 
-model2.full <- lmer(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
-                 age + ed + female + partisanship + 
-                 needcog + needjudge +
-                 extroverted + agreeableness + openness + conscientiousness + stability +
-                                        (1|ResponseId) + (1|scenario),    
-                data = experiments[experiments$adviceWt <= 1,]); summary(model2.full)
+#### Impacting Behavior? - NC and NE
+m5 <- lmer(adviceWt ~ needcog + needjudge +
+             age + ed + female + partisanship +
+             algorithm + judge +
+             I(algorithm*needcog) + I(algorithm*needjudge) +I(judge*needcog) + I(judge*needjudge) +
+             (1|ResponseId) + (1|scenario),
+           data = cj1long[cj1long$adviceWt <= 1,]); summary(m5)
 
-model2.inxn <- lmer(tia ~ AvgHumanTreat + AlgHumanTreat + LernerTreat + 
-                 age + ed + female + partisanship + 
-                 needcog + needjudge +
-                 extroverted + agreeableness + openness + conscientiousness + stability +
-               LernerTreat*extroverted + LernerTreat*agreeableness + LernerTreat*openness + LernerTreat*conscientiousness + LernerTreat*stability +
-                    (1|ResponseId) + (1|scenario),              
-                    data = experiments[experiments$adviceWt <= 1,]); summary(model2.inxn)
+m6 <- lmer(distance ~ needcog + needjudge +
+             age + ed + female + partisanship +
+             algorithm + judge +
+             I(algorithm*needcog) + I(algorithm*needjudge) +I(judge*needcog) + I(judge*needjudge) +
+             (1|ResponseId) + (1|scenario),
+           data = cj1long[cj1long$adviceWt <= 1,]); summary(m6)
 
-### SJPlot Stuff
-## CJ - NfC/NfE
+#### TRUST - Big 5
+m7 <- lmer(tia ~ agreeable + open + 
+             age + ed + female + partisanship +
+             algorithm + judge +
+             (1|ResponseId) + (1|scenario),
+           data = cj1long[cj1long$adviceWt <= 1,]); summary(m7)
+
+#### Impacting Behavior? - Big 5
+m8 <- lmer(adviceWt ~ agreeable + open + 
+             age + ed + female + partisanship +
+             algorithm + judge +
+             I(algorithm*agreeable) + I(algorithm*open)+
+             I(judge*agreeable) + I(judge*open) +
+             (1|ResponseId) + (1|scenario),
+           data = cj1long[cj1long$adviceWt <= 1,]); summary(m8)
+
+m9 <- lmer(distance ~ agreeable + open + 
+             age + ed + female + partisanship +
+             algorithm + judge +
+             I(algorithm*agreeable) + I(algorithm*open)+
+             I(judge*agreeable) + I(judge*open) +
+             (1|ResponseId) + (1|scenario),
+           data = cj1long[cj1long$adviceWt <= 1,]); summary(m9)
+
+### Basic SJPlot Stuff as a start
+## NfC/NfE
 cj1long$NfC <- cj1long$needcog
 cj1long$NfE <- cj1long$needjudge
 cj1long$Algorithm <- cj1long$algorithm
 cj1long$Judge <- cj1long$judge
 
-# Re-run for Sjplot labels
 m4 <- lmer(tia ~ NfC + NfE +
              age + ed + female + partisanship +
              algorithm + judge +
              (1|ResponseId) + (1|scenario),
            data = cj1long[cj1long$adviceWt <= 1,]); summary(m4)
 
-
 library(sjPlot)
 library(sjlabelled)
 library(sjmisc)
-library(ggplot2)
-
 
 plot_model(m4, vline.color = "dark gray", colors = "black", title = "Impact of NfC & NfE on Trust in Automation",
            order.terms = c(1, 2),
@@ -501,9 +523,6 @@ plot_model(m6, vline.color = "dark gray", colors = "black", title = "Impact of N
            rm.terms = c("needcog", "needjudge", "age", "ed", "female", "partisanship", "algorithm", "judge"),
            auto.label = FALSE)
 
-
-
-
 # TIA Conditional Plots
 plot_model(m4, type = "pred", terms = c("needcog", "algorithm"), 
            title = "Conditional Effect of NfC & Algorithm Condition on Trust in Automation") + ylim(3,5.5)
@@ -517,6 +536,3 @@ plot_model(m5, type = "pred", terms = c("needcog", "algorithm"),
 
 plot_model(m5, type = "pred", terms = c("needcog", "judge"), 
            title = "Conditional Effect of NfC & Judge Condition on Weight of Advice") + ylim(0,0.6)
-
-
-
