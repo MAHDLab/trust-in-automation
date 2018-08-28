@@ -1,7 +1,6 @@
 # Analysis of criminal justice experiment
 
 library(arm)
-library(gridExtra)
 library(tidyverse)
 library(here)
 library(stargazer)
