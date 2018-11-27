@@ -1,5 +1,7 @@
+#
 # Analysis of criminal justice experiment
-
+#
+# Load the libraries
 library(arm)
 library(tidyverse)
 library(here)
